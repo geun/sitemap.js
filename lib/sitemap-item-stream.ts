@@ -218,6 +218,18 @@ export class SitemapItemStream extends Transform {
     });
 
     item.links.forEach((link) => {
+      if (link.media) {
+        this.push(
+          element(TagNames['xhtml:link'], {
+            rel: 'alternate',
+            media: link.media,
+            href: link.url,
+            mobile: true,
+          })
+        );
+
+        return;
+      }
       if (link.lang || link.hreflang) {
         this.push(
           element(TagNames['xhtml:link'], {
@@ -226,18 +238,8 @@ export class SitemapItemStream extends Transform {
             href: link.url,
           })
         );
-      } else if (link.media) {
-        this.push(
-          element(TagNames['xhtml:link'], {
-            rel: 'alternate',
-            media: 'only screen and (max-width: 640px)',
-            href: link.url,
-            mobile: true,
-          })
-        );
       }
     });
-
 
     if (item.expires) {
       this.push(
