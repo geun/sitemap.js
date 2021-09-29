@@ -17,7 +17,7 @@ const pickStreamOrArg = (argv) => {
         return process.stdin;
     }
     else {
-        return (0, fs_1.createReadStream)(argv._[0], { encoding: 'utf8' });
+        return fs_1.createReadStream(argv._[0], { encoding: 'utf8' });
     }
 };
 const argSpec = {
@@ -36,7 +36,7 @@ const argSpec = {
 const argv = arg(argSpec);
 function getStream() {
     if (argv._ && argv._.length) {
-        return (0, fs_1.createReadStream)(argv._[0]);
+        return fs_1.createReadStream(argv._[0]);
     }
     else {
         console.warn('Reading from stdin. If you are not piping anything in, this command is not doing anything');
@@ -83,12 +83,12 @@ else if (argv['--parse']) {
         .pipe(new sitemap_parser_1.XMLToSitemapItemStream())
         .pipe(new sitemap_parser_1.ObjectStreamToJSON({ lineSeparated: !argv['--single-line-json'] }));
     if (argv['--gzip']) {
-        oStream = oStream.pipe((0, zlib_1.createGzip)());
+        oStream = oStream.pipe(zlib_1.createGzip());
     }
     oStream.pipe(process.stdout);
 }
 else if (argv['--validate']) {
-    (0, xmllint_1.xmlLint)(getStream())
+    xmllint_1.xmlLint(getStream())
         .then(() => console.log('valid'))
         .catch(([error, stderr]) => {
         if (error instanceof errors_1.XMLLintUnavailable) {
@@ -113,30 +113,30 @@ else if (argv['--index']) {
             const path = `./sitemap-${i}.xml`;
             let ws;
             if (argv['--gzip']) {
-                ws = sm.pipe((0, zlib_1.createGzip)()).pipe((0, fs_1.createWriteStream)(path));
+                ws = sm.pipe(zlib_1.createGzip()).pipe(fs_1.createWriteStream(path));
             }
             else {
-                ws = sm.pipe((0, fs_1.createWriteStream)(path));
+                ws = sm.pipe(fs_1.createWriteStream(path));
             }
             return [new url_1.URL(path, baseURL).toString(), sm, ws];
         },
     });
-    let oStream = (0, utils_1.lineSeparatedURLsToSitemapOptions)(pickStreamOrArg(argv)).pipe(sms);
+    let oStream = utils_1.lineSeparatedURLsToSitemapOptions(pickStreamOrArg(argv)).pipe(sms);
     if (argv['--gzip']) {
-        oStream = oStream.pipe((0, zlib_1.createGzip)());
+        oStream = oStream.pipe(zlib_1.createGzip());
     }
     oStream.pipe(process.stdout);
 }
 else {
     const sms = new sitemap_stream_1.SitemapStream();
     if (argv['--prepend']) {
-        (0, fs_1.createReadStream)(argv['--prepend'])
+        fs_1.createReadStream(argv['--prepend'])
             .pipe(new sitemap_parser_1.XMLToSitemapItemStream())
             .pipe(sms);
     }
-    const oStream = (0, utils_1.lineSeparatedURLsToSitemapOptions)(pickStreamOrArg(argv)).pipe(sms);
+    const oStream = utils_1.lineSeparatedURLsToSitemapOptions(pickStreamOrArg(argv)).pipe(sms);
     if (argv['--gzip']) {
-        oStream.pipe((0, zlib_1.createGzip)()).pipe(process.stdout);
+        oStream.pipe(zlib_1.createGzip()).pipe(process.stdout);
     }
     else {
         oStream.pipe(process.stdout);

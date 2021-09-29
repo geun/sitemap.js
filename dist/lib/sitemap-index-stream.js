@@ -29,21 +29,21 @@ class SitemapIndexStream extends stream_1.Transform {
             this.hasHeadOutput = true;
             let stylesheet = '';
             if (this.xslUrl) {
-                stylesheet = (0, sitemap_stream_1.stylesheetInclude)(this.xslUrl);
+                stylesheet = sitemap_stream_1.stylesheetInclude(this.xslUrl);
             }
             this.push(xmlDec + stylesheet + sitemapIndexTagStart);
         }
-        this.push((0, sitemap_xml_1.otag)(IndexTagNames.sitemap));
+        this.push(sitemap_xml_1.otag(IndexTagNames.sitemap));
         if (typeof item === 'string') {
-            this.push((0, sitemap_xml_1.element)(IndexTagNames.loc, item));
+            this.push(sitemap_xml_1.element(IndexTagNames.loc, item));
         }
         else {
-            this.push((0, sitemap_xml_1.element)(IndexTagNames.loc, item.url));
+            this.push(sitemap_xml_1.element(IndexTagNames.loc, item.url));
             if (item.lastmod) {
-                this.push((0, sitemap_xml_1.element)(IndexTagNames.lastmod, new Date(item.lastmod).toISOString()));
+                this.push(sitemap_xml_1.element(IndexTagNames.lastmod, new Date(item.lastmod).toISOString()));
             }
         }
-        this.push((0, sitemap_xml_1.ctag)(IndexTagNames.sitemap));
+        this.push(sitemap_xml_1.ctag(IndexTagNames.sitemap));
         callback();
     }
     _flush(cb) {

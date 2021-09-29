@@ -54,7 +54,7 @@ function validateSMIOptions(conf, level = types_1.ErrorLevel.WARN, errorHandler 
         errorHandler(new errors_1.NoURLError(), level);
     }
     if (changefreq) {
-        if (!(0, types_1.isValidChangeFreq)(changefreq)) {
+        if (!types_1.isValidChangeFreq(changefreq)) {
             errorHandler(new errors_1.ChangeFreqInvalidError(url, changefreq), level);
         }
     }
@@ -113,7 +113,7 @@ function validateSMIOptions(conf, level = types_1.ErrorLevel.WARN, errorHandler 
                 errorHandler(new errors_1.InvalidVideoCategory(url, vid.category.length), level);
             }
             if (vid.family_friendly !== undefined &&
-                !(0, types_1.isValidYesNo)(vid.family_friendly)) {
+                !types_1.isValidYesNo(vid.family_friendly)) {
                 errorHandler(new errors_1.InvalidVideoFamilyFriendly(url, vid.family_friendly), level);
             }
             if (vid.restriction) {
@@ -121,17 +121,17 @@ function validateSMIOptions(conf, level = types_1.ErrorLevel.WARN, errorHandler 
                     errorHandler(new errors_1.InvalidVideoRestriction(url, vid.restriction), level);
                 }
                 if (!vid['restriction:relationship'] ||
-                    !(0, types_1.isAllowDeny)(vid['restriction:relationship'])) {
+                    !types_1.isAllowDeny(vid['restriction:relationship'])) {
                     errorHandler(new errors_1.InvalidVideoRestrictionRelationship(url, vid['restriction:relationship']), level);
                 }
             }
             // TODO price element should be unbounded
             if ((vid.price === '' && vid['price:type'] === undefined) ||
-                (vid['price:type'] !== undefined && !(0, types_1.isPriceType)(vid['price:type']))) {
+                (vid['price:type'] !== undefined && !types_1.isPriceType(vid['price:type']))) {
                 errorHandler(new errors_1.InvalidVideoPriceType(url, vid['price:type'], vid.price), level);
             }
             if (vid['price:resolution'] !== undefined &&
-                !(0, types_1.isResolution)(vid['price:resolution'])) {
+                !types_1.isResolution(vid['price:resolution'])) {
                 errorHandler(new errors_1.InvalidVideoResolution(url, vid['price:resolution']), level);
             }
             if (vid['price:currency'] !== undefined &&
@@ -168,7 +168,7 @@ class ReadlineStream extends stream_1.Readable {
         }
         options.objectMode = true;
         super(options);
-        this._source = (0, readline_1.createInterface)({
+        this._source = readline_1.createInterface({
             input: options.input,
             terminal: false,
             crlfDelay: Infinity,
@@ -332,7 +332,7 @@ function normalizeURL(elem, hostname, lastmodDateOnly = false) {
     }
     // If given a file to use for last modified date
     if (smiLoose.lastmodfile) {
-        const { mtime } = (0, fs_1.statSync)(smiLoose.lastmodfile);
+        const { mtime } = fs_1.statSync(smiLoose.lastmodfile);
         smi.lastmod = new Date(mtime).toISOString();
         // The date of last modification (YYYY-MM-DD)
     }

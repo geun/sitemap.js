@@ -18,7 +18,7 @@ const urlsetTagStart = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0
 const getURLSetNs = ({ news, video, image, xhtml, custom }, xslURL) => {
     let ns = xmlDec;
     if (xslURL) {
-        ns += (0, exports.stylesheetInclude)(xslURL);
+        ns += exports.stylesheetInclude(xslURL);
     }
     ns += urlsetTagStart;
     if (news) {
@@ -74,7 +74,7 @@ class SitemapStream extends stream_1.Transform {
             this.hasHeadOutput = true;
             this.push(getURLSetNs(this.xmlNS, this.xslUrl));
         }
-        this.smiStream.write((0, utils_1.validateSMIOptions)((0, utils_1.normalizeURL)(item, this.hostname, this.lastmodDateOnly), this.level, this.errorHandler));
+        this.smiStream.write(utils_1.validateSMIOptions(utils_1.normalizeURL(item, this.hostname, this.lastmodDateOnly), this.level, this.errorHandler));
         callback();
     }
     _flush(cb) {

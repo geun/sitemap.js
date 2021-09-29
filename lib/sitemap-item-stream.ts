@@ -230,7 +230,7 @@ export class SitemapItemStream extends Transform {
         this.push(
           element(TagNames['xhtml:link'], {
             rel: 'alternate',
-            media: link.media,
+            media: 'only screen and (max-width: 640px)',
             href: link.url,
           })
         );

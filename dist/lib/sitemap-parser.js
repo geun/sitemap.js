@@ -120,7 +120,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     currentItem.url = text;
                     break;
                 case types_1.TagNames.changefreq:
-                    if ((0, types_1.isValidChangeFreq)(text)) {
+                    if (types_1.isValidChangeFreq(text)) {
                         currentItem.changefreq = text;
                     }
                     break;
@@ -146,7 +146,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     currentVideo.content_loc = text;
                     break;
                 case types_1.TagNames['video:requires_subscription']:
-                    if ((0, types_1.isValidYesNo)(text)) {
+                    if (types_1.isValidYesNo(text)) {
                         currentVideo.requires_subscription = text;
                     }
                     break;
@@ -166,7 +166,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     currentVideo.uploader = text;
                     break;
                 case types_1.TagNames['video:family_friendly']:
-                    if ((0, types_1.isValidYesNo)(text)) {
+                    if (types_1.isValidYesNo(text)) {
                         currentVideo.family_friendly = text;
                     }
                     break;
@@ -186,7 +186,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     currentVideo.category = text;
                     break;
                 case types_1.TagNames['video:live']:
-                    if ((0, types_1.isValidYesNo)(text)) {
+                    if (types_1.isValidYesNo(text)) {
                         currentVideo.live = text;
                     }
                     break;
@@ -325,7 +325,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                 case types_1.TagNames['video:id']:
                     break;
                 case types_1.TagNames['video:restriction']:
-                    if (attr.name === 'relationship' && (0, types_1.isAllowDeny)(attr.value)) {
+                    if (attr.name === 'relationship' && types_1.isAllowDeny(attr.value)) {
                         currentVideo['restriction:relationship'] = attr.value;
                     }
                     else {
@@ -333,13 +333,13 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     }
                     break;
                 case types_1.TagNames['video:price']:
-                    if (attr.name === 'type' && (0, types_1.isPriceType)(attr.value)) {
+                    if (attr.name === 'type' && types_1.isPriceType(attr.value)) {
                         currentVideo['price:type'] = attr.value;
                     }
                     else if (attr.name === 'currency') {
                         currentVideo['price:currency'] = attr.value;
                     }
-                    else if (attr.name === 'resolution' && (0, types_1.isResolution)(attr.value)) {
+                    else if (attr.name === 'resolution' && types_1.isResolution(attr.value)) {
                         currentVideo['price:resolution'] = attr.value;
                     }
                     else {
@@ -350,7 +350,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     if (attr.name === 'autoplay') {
                         currentVideo['player_loc:autoplay'] = attr.value;
                     }
-                    else if (attr.name === 'allow_embed' && (0, types_1.isValidYesNo)(attr.value)) {
+                    else if (attr.name === 'allow_embed' && types_1.isValidYesNo(attr.value)) {
                         currentVideo['player_loc:allow_embed'] = attr.value;
                     }
                     else {
@@ -358,7 +358,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
                     }
                     break;
                 case types_1.TagNames['video:platform']:
-                    if (attr.name === 'relationship' && (0, types_1.isAllowDeny)(attr.value)) {
+                    if (attr.name === 'relationship' && types_1.isAllowDeny(attr.value)) {
                         currentVideo['platform:relationship'] = attr.value;
                     }
                     else {
