@@ -125,19 +125,20 @@ class SitemapItemStream extends stream_1.Transform {
             this.push(sitemap_xml_1.ctag(types_1.TagNames['video:video']));
         });
         item.links.forEach((link) => {
+            if (link.media) {
+                this.push(sitemap_xml_1.element(types_1.TagNames['xhtml:link'], {
+                    rel: 'alternate',
+                    media: link.media,
+                    href: link.url,
+                    mobile: true,
+                }));
+                return;
+            }
             if (link.lang || link.hreflang) {
                 this.push(sitemap_xml_1.element(types_1.TagNames['xhtml:link'], {
                     rel: 'alternate',
                     hreflang: link.lang || link.hreflang,
                     href: link.url,
-                }));
-            }
-            else if (link.media) {
-                this.push(sitemap_xml_1.element(types_1.TagNames['xhtml:link'], {
-                    rel: 'alternate',
-                    media: 'only screen and (max-width: 640px)',
-                    href: link.url,
-                    mobile: true,
                 }));
             }
         });
