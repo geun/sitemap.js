@@ -137,7 +137,7 @@ class SitemapItemStream extends stream_1.Transform {
                     rel: 'alternate',
                     media: 'only screen and (max-width: 640px)',
                     href: link.url,
-                    mobile: true
+                    mobile: true,
                 }));
             }
         });

@@ -59,7 +59,7 @@ class XMLToSitemapItemStream extends stream_1.Transform {
             xmlns: true,
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            strictEntities: true,
+            strictEntities: false,
             trim: true,
         });
         this.level = opts.level || types_1.ErrorLevel.WARN;

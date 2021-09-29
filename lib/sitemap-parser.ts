@@ -89,7 +89,7 @@ export class XMLToSitemapItemStream extends Transform {
       xmlns: true,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      strictEntities: true,
+      strictEntities: false,
       trim: true,
     });
     this.level = opts.level || ErrorLevel.WARN;
