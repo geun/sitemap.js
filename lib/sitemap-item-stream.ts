@@ -232,10 +232,12 @@ export class SitemapItemStream extends Transform {
             rel: 'alternate',
             media: 'only screen and (max-width: 640px)',
             href: link.url,
+            mobile: true
           })
         );
       }
     });
+
 
     if (item.expires) {
       this.push(
