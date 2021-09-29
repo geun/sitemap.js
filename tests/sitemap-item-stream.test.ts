@@ -80,6 +80,10 @@ describe('sitemapItem-stream', () => {
           lang: 'ja',
           url: simpleURL,
         },
+        {
+          media: 'only screen and (max-width: 640px)',
+          url: simpleURL,
+        },
       ],
       url: simpleURL,
       lastmod: '2019-01-01',
@@ -161,6 +165,7 @@ describe('sitemapItem-stream', () => {
           ) +
           `<xhtml:link rel="alternate" hreflang="en" href="${simpleURLEscaped}"/>` +
           `<xhtml:link rel="alternate" hreflang="ja" href="${simpleURLEscaped}"/>` +
+          `<xhtml:link rel="alternate" meida="only screen and (max-width: 640px)" href="${simpleURLEscaped}"/>` +
           el('expires', '2019-01-01T00:00:00.000Z') +
           '<xhtml:link rel="alternate" href="android-app://com.company.test/page-1/"/>' +
           '<xhtml:link rel="amphtml" href="http://ampproject.org/article.amp.html"/>' +

@@ -218,13 +218,23 @@ export class SitemapItemStream extends Transform {
     });
 
     item.links.forEach((link) => {
-      this.push(
-        element(TagNames['xhtml:link'], {
-          rel: 'alternate',
-          hreflang: link.lang || link.hreflang,
-          href: link.url,
-        })
-      );
+      if (link.lang || link.hreflang) {
+        this.push(
+          element(TagNames['xhtml:link'], {
+            rel: 'alternate',
+            hreflang: link.lang || link.hreflang,
+            href: link.url,
+          })
+        );
+      } else if (link.media) {
+        this.push(
+          element(TagNames['xhtml:link'], {
+            rel: 'alternate',
+            media: link.media,
+            href: link.url,
+          })
+        );
+      }
     });
 
     if (item.expires) {

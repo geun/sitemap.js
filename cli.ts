@@ -12,6 +12,9 @@ import { SitemapStream } from './lib/sitemap-stream';
 import { SitemapAndIndexStream } from './lib/sitemap-index-stream';
 import { URL } from 'url';
 import { createGzip, Gzip } from 'zlib';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { WriteStream } from 'node:fs';
 /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const arg = require('arg');
